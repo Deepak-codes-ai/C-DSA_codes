@@ -945,57 +945,110 @@ using namespace std;
 //   return 0;
 // }
 
-int MajorityElem(vector<int> nums)
+// int MajorityElem(vector<int> nums)
+// {
+//--------------------------------------
+// int n = nums.size();
+// for (int value : nums)
+// {
+//   int freq = 0;
+//   for (int el : nums)
+//   {
+//     if (el == value)
+//     {
+//       freq++;
+//     }
+//   }
+//   if (freq > n / 2)
+//   {
+//     return value;
+//   }
+// }
+//--------------------------------------
+//--------------------------------------
+//   int n = nums.size();
+
+//   // sort
+//   sort(nums.begin(), nums.end());
+
+//   // freq count
+//   int freq = 1, ans = nums[0];
+//   for (int i = 1; i < n; i++)
+//   {
+//     if (nums[i] == nums[i - 1])
+//     {
+//       freq++;
+//     }
+//     else
+//     {
+//       freq = 1;
+//       ans = nums[i];
+//     }
+
+//     if (freq > n / 2)
+//     {
+//       return ans;
+//     }
+//   }
+//   return ans;
+// }
+// int main()
+// {
+//   vector<int> nums = {3, 2, 3};
+//   int ans = MajorityElem(nums);
+//   cout << ans;
+//   return 0;
+// }
+
+//--------------------------
+// double myPow(double x, int n)
+// {
+//   // if (n == 0)
+//   //   return 1.0;
+//   // if (x == 0)
+//   //   return 0.0;
+
+//   long power = n;
+//   double ans = 1;
+
+//   if (power < 0)
+//   {
+//     x = 1 / x;
+//     power = -power;
+//   }
+//   while (power > 0)
+//   {
+//     if (power % 2 == 1)
+//     {
+//       ans *= x;
+//     }
+//     x *= x;
+//     power /= 2;
+//   }
+//   return ans;
+// }
+// int main()
+// {
+//   double x = -3;
+//   long n = 2;
+//   cout << "Power value is " << myPow(x, n) << endl;
+//   return 0;
+// }
+
+int maxProfit(vector<int> &prices)
 {
-  //--------------------------------------
-  // int n = nums.size();
-  // for (int value : nums)
-  // {
-  //   int freq = 0;
-  //   for (int el : nums)
-  //   {
-  //     if (el == value)
-  //     {
-  //       freq++;
-  //     }
-  //   }
-  //   if (freq > n / 2)
-  //   {
-  //     return value;
-  //   }
-  // }
-  //--------------------------------------
-  //--------------------------------------
-  int n = nums.size();
+  int maxprofit = 0, bestbuy = prices[0];
 
-  // sort
-  sort(nums.begin(), nums.end());
-
-  // freq count
-  int freq = 1, ans = nums[0];
-  for (int i = 1; i < n; i++)
+  for (int i = 0; i < prices.size(); i++)
   {
-    if (nums[i] == nums[i - 1])
-    {
-      freq++;
-    }
-    else
-    {
-      freq = 1;
-      ans = nums[i];
-    }
-
-    if (freq > n / 2)
-    {
-      return ans;
-    }
+    maxprofit = max(maxprofit, prices[i] - bestbuy);
+    bestbuy = min(bestbuy, prices[i]);
   }
-  return ans;
+  return maxprofit;
 }
 int main()
 {
-  vector<int> nums = {3, 2, 3};
-  int ans = MajorityElem(nums);
-  cout << ans;
+  vector<int> prices = {7, 2, 5, 3, 6, 4};
+  cout << "Profit : " << maxProfit(prices) << endl;
   return 0;
 }
